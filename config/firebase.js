@@ -10,18 +10,17 @@ const firebase = {
     measurementId: process.env.FIREBASE_MEASUREMENT_ID,
   },
   emulator: {
-    enabled: process.env.USE_EMULATOR === 'true',
+    enabled: process.env.USE_EMULATOR === "true",
     authURL: `${location.protocol}//${location.hostname}:${
-      process.env.EMULATOR_AUTH_PORT ?? '9099'
+      process.env.EMULATOR_AUTH_PORT ?? "9099"
     }`,
-    firestorePort: process.env.EMULATOR_FIRESTORE_PORT ?? '8080',
+    firestorePort: process.env.EMULATOR_FIRESTORE_PORT ?? "8080",
+    functionsURL:
+      process.env.USE_EMULATOR === "true"
+        ? process.env.EMULATOR_FUNCTIONS_URL
+        : process.env.FUNCTIONS_URL,
+    functionsPort: process.env.EMULATOR_FUNCTIONS_PORT ?? "5001",
   },
-  functionsURL:
-    process.env.USE_EMULATOR === 'true'
-      ? process.env.EMULATOR_FUNCTIONS_URL
-      : process.env.FUNCTIONS_URL,
-  functionsPort: process.env.EMULATOR_FUNCTIONS_PORT ?? '5001',
-  }
-  
-  export default firebase
-  
+}
+
+export default firebase
