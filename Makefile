@@ -1,13 +1,17 @@
-firebase-init: dc-override env up login
+firebase-init: dc-override up create-firebase-log create-functions-index.js login
 up:
 	docker-compose up -d
 stop:
 	docker-compose stop
+create-firebase-log:
+	touch database-debug.log firestore-debug.log pubsub-debug.log ui-debug.log
+create-functions-index.js:
+	touch functions/lib/index.js
 start: up emu-start
 env:
 	cp .env.sample .env
 dc-override:
-	cp docker-compose.override.sample.yml docker-compose.yml
+	cp docker-compose.override.sample.yml docker-compose.override.yml
 login:
 	docker-compose exec firebase firebase login --no-localhost
 emu-start:
